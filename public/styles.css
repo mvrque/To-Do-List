@@ -1,0 +1,23 @@
+.add-tasks{
+    border: 1px solid black;
+    text-align: center;
+}
+.add-tasks-form{
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 200px;
+    margin: 0 auto;
+}
+.add-description{
+    height: 100px;
+}
+input{
+    text-align: center;
+}
+.completed{
+    color: gray;
+    text-decoration: line-through;
+
+}
