@@ -16,24 +16,7 @@ Array.from(itemCompleted).forEach((element)=>{
 
 
 
-async function deleteItem(){
-    const itemText = this.parentNode.childNodes[1].innerText
-    try{
-        const response = await fetch('deleteItem', {
-            method: 'delete',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              'itemFromJS': itemText
-            })
-          })
-        const data = await response.json()
-        console.log(data)
-        location.reload()
 
-    }catch(err){
-        console.log(err)
-    }
-}
 
 async function markComplete(){
     const itemText = this.parentNode.childNodes[1].innerText //clicked on this thing
@@ -54,7 +37,7 @@ async function markComplete(){
 }
 
 async function markUnComplete(){
-    const itemText = this.parentNode.childNodes[1].innerText //clicked on this thing
+    const itemText = this.parentNode.childNodes[2].innerText //clicked on this thing
     try{ 
         const response = await fetch('markUnComplete', {
             method: 'put',
@@ -71,4 +54,21 @@ async function markUnComplete(){
     }
 }
 
+async function deleteItem(){
+    const itemText = this.parentNode.childNodes[1].innerText
+    try{
+        const response = await fetch('deleteItem', {
+            method: 'delete',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              'itemFromJS': itemText
+            })
+          })
+        const data = await response.json()
+        console.log(data)
+        location.reload()
 
+    }catch(err){
+        console.log(err)
+    }
+}

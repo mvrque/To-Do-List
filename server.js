@@ -5,6 +5,7 @@
 //npm install body-parser --save = it is  a middleware to tidy up the request object
 //npm install mongodb --save
 //npm install ejs --save
+//npm install dotenv --save 
 
 //-----------------------------------------------------------------------------
 
@@ -12,9 +13,9 @@
 const express = require('express');
 const app = express();
 const MongoClient = require('mongodb').MongoClient
-const connectionString = 'mongodb+srv://mvrque:smokeweed123@cluster0.pv9ll.mongodb.net/?retryWrites=true&w=majority'
 
-
+require('dotenv').config()
+const connectionString = process.env.DB_STRING
 
 
 MongoClient.connect(connectionString, {
@@ -33,8 +34,8 @@ app.use(express.json())
 
 //get request to the server to perfom READ operation
 app.get('/', async (req, res) => {
-    const toDoItems = await db.collection('tasks').find().toArray()
-    const itemsLeft = await db.collection('tasks').countDocuments({completed: false})
+    //const toDoItems = await db.collection('tasks').find().toArray()
+    //const itemsLeft = await db.collection('tasks').countDocuments({completed: false})
     //res.render('index.ejs', {items: toDoItems, left: itemsLeft })
 
     db.collection('tasks').find().toArray() //
@@ -91,16 +92,15 @@ app.put('/markUnComplete', (req, res) => {
     .catch(error => console.error(error))
 })
 
-app.delete('/deleteItem', (req, res) => {
-    db.collection('tasks').deleteOne({taskname: req.body.itemFromJS})
+app.delete('/deleteItem', (request, respond) => {
+    db.collection('tasks').deleteOne({taskname: request.body.itemFromJS})
     .then(result => {
         console.log('Todo Deleted')
-        res.json('Todo Deleted')
+        respond.json('Todo Deleted')
     })
     .catch(error => console.error(error))
 })
 
-    
 
 
 
