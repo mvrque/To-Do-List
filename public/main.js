@@ -37,7 +37,7 @@ async function markComplete(){
 }
 
 async function markUnComplete(){
-    const itemText = this.parentNode.childNodes[2].innerText //clicked on this thing
+    const itemText = this.parentNode.childNodes[1].innerText.trim() //clicked on this thing
     try{ 
         const response = await fetch('markUnComplete', {
             method: 'put',
@@ -55,7 +55,7 @@ async function markUnComplete(){
 }
 
 async function deleteItem(){
-    const itemText = this.parentNode.childNodes[1].innerText
+    const itemText = this.parentNode.childNodes[1].innerText.trim()
     try{
         const response = await fetch('deleteItem', {
             method: 'delete',
